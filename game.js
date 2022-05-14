@@ -44,7 +44,6 @@ function countDown() {
   let interval = setInterval(() => {
     const now = new Date().getTime();
     let distance = countDown - now;
-    console.log(distance, countDown, now)
     document.getElementById("timer").innerHTML = parseInt(distance * 0.001);
     if (distance < 0) {
       timeUp = true;
