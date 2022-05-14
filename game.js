@@ -14,8 +14,8 @@ function randomHole(holes) {
   const idx = Math.floor(Math.random() * holes.length);
   const hole = holes[idx];
   if (hole === lastHole) {
-  console.log('Ah nah thats the same one bud');
-  return randomHole(holes);
+    console.log('Ah nah thats the same one bud');
+    return randomHole(holes);
   }
   lastHole = hole;
   return hole;
@@ -36,7 +36,22 @@ function startGame() {
   timeUp = false;
   score = 0;
   peep();
-  setTimeout(() => timeUp = true, 10000)
+  countDown();
+}
+
+function countDown() {
+  const countDown = new Date().getTime() + 18000;
+  let interval = setInterval(() => {
+    const now = new Date().getTime();
+    let distance = countDown - now;
+    console.log(distance, countDown, now)
+    document.getElementById("timer").innerHTML = parseInt(distance * 0.001);
+    if (distance < 0) {
+      timeUp = true;
+      clearInterval(interval);
+      document.getElementById("timer").innerHTML = "FINISHED";
+    }
+  }, 1000);
 }
 
 function bonk(e) {
